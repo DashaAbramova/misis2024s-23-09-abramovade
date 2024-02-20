@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(polevoi-d-v-23-00)
+project(misis2024s-23-09-abramovade)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "cmake")
