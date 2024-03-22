@@ -27,10 +27,15 @@ public:
 
   [[nodiscard]] Rational operator-() const noexcept { return { -num_, den_ }; }
 
-  Rational &operator+=(const int64_t rhs) noexcept;
-  Rational &operator-=(const int64_t rhs) noexcept;
-  Rational &operator*=(const int64_t rhs) noexcept;
-  Rational &operator/=(const int64_t rhs);
+  Rational &operator+=(const Rational &rhs) noexcept;
+  Rational &operator-=(const Rational &rhs) noexcept;
+  Rational &operator*=(const Rational &rhs) noexcept;
+  Rational &operator/=(const Rational &rhs);
+
+  Rational& operator+=(const int64_t rhs) noexcept;
+  Rational& operator-=(const int64_t rhs) noexcept;
+  Rational& operator*=(const int64_t rhs) noexcept;
+  Rational& operator/=(const int64_t rhs);
 
   Rational &operator++() noexcept;
   Rational operator++(int) noexcept;
