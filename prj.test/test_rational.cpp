@@ -3,6 +3,18 @@
 
 #include <rational/rational.hpp>
 
+TEST_CASE("Rational input/output") {
+	Rational t(1, 2);
+	std::ostringstream output;
+	output << t;
+	CHECK(output.str() == "1/2");
+	Rational m;
+	std::istringstream input("5/3");
+	input >> m;
+	CHECK(m == Rational(5, 3));
+}
+
+
 TEST_CASE("rational ctor") {
 	Rational r_def;
 	CHECK(0 == r_def.num());
