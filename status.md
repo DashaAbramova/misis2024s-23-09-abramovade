@@ -1,5 +1,4 @@
-CHECK: 20240325-005336
-ERROR: file codeforces.id is absent
+CHECK: 20240401-065049
 ERROR: lab complex - test build failed
 ERROR: lab complex_io - test build failed
 ERROR: lab complex_m - test build failed
