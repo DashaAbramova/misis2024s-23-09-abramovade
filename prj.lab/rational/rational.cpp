@@ -62,8 +62,8 @@ Rational &Rational::operator*=(const Rational &rhs) noexcept {
     return *this; 
 };
 Rational &Rational::operator/=(const Rational &rhs) { 
-    num_ *= rhs.num();
-    den_ *= rhs.den();
+    num_ *= rhs.den();
+    den_ *= rhs.num();
     Reduce();
     return *this; 
 };

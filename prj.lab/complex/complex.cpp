@@ -111,7 +111,7 @@ Complex operator-(const double lhs, const Complex& rhs) noexcept {
 Complex operator*(const Complex& lhs, const Complex& rhs) noexcept { 
 	double reNew = (lhs.re * rhs.re) - (lhs.im * rhs.im);
 	double imNew = (lhs.im * rhs.im) + (lhs.im * rhs.re);
-	return Complex(reNew, imNew)
+	return Complex(reNew, imNew);
 }
 Complex operator*(const Complex& lhs, const double rhs) noexcept { 
 	double reNew = lhs.re * rhs;
