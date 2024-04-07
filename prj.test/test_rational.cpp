@@ -1,8 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+
+
 #include "doctest.h"
 
 #include <rational/rational.hpp>
-
 
 TEST_CASE("Rational input/output") {
 	Rational t(1, 2);

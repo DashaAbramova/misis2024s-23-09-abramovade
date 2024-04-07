@@ -1,5 +1,32 @@
-// 2024 by Polevoi Dmitry under Unlicense
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 2024 by Polevoi Dmitry under Unlicense
+/*
 #include <complex/complex.hpp>
 #include <stackarr/stackarr.hpp>
 
@@ -47,3 +74,4 @@ const Complex& StackArr::Top() const {
 void StackArr::Clear() noexcept {
   i_top_ = -1;
 }
+*/
