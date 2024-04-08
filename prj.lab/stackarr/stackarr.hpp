@@ -1,53 +1,25 @@
 #include<iostream>
 #include<array>
+#include<stack>
 
-template <int T>
+
+template <typename T>
 class StackArrT {
 public:
-	StackArrT() {
-		data_ = new T;
-		i_top_++;
-	}
-
-	~StackArrT() {
-		delete[];
-		data_ = nullptr;
-	}
-
+	StackArrT();
+	~StackArrT();
 	StackArrT(const StackArrT<T>& other);
 	StackArrT(StackArrT<T>&& other);
 	StackArrT(const std::initializer_list<T>& list);
 
-	void StackArrT::push(const T& value) {
-		i_top_ += 1;
-		*i_top_ = value;
-	};
-	void StackArrT::pop(int T) {
-		std::cout << *i_top_;
-		i_top_ -= 1;
-		i_top_ = *i_top_;
-	};
-	T& StackArrT::top(int T) const {
-		std::cout << *i_top_;
-	};
-	void StackArrT::swap(StackArrT<T>& other);
-	void StackArrT::merge(StackArrT<T>& other);
+	void push(const T& value);
+	void pop();
+	T& top() const;
+	void swap(StackArrT<T>& other);
+	void merge(StackArrT<T>& other);
 
-	bool StackArrT::empty(int T) const {
-		if (size_ == 0) {
-			std::cout << "true";
-		}
-		else {
-			std::cout << "false";
-		}
-	};
-	std::ptrdiff_t size() const {
-		n = 0;
-		for (int i = 0; i < i_top_; i++) {
-			n += 1;
-		}
-		std::cout << n;
-	};
+	bool empty() const;
+	std::ptrdiff_t size() const;
 
 	bool operator==(const StackArrT<T>& rhs) const;
 	bool operator!=(const StackArrT<T>& rhs) const;
@@ -59,71 +31,84 @@ private:
 	std::ptrdiff_t i_top_ = -1; //!< индекс top элемента
 	T* data_ = nullptr;   //!< элементы стека
 };
-	
 
 
-TEST_CASE("array") {
-	int* arr = new int[5];
-	for (int i = 0; i < 5; i++) {
-		arr[i] = i;
-	}
+
+
+template <typename T>
+StackArrT<T>::StackArrT() {
+	data_ = new T;
+	i_top_++;
+	size_ = 0;
 }
 
+template <typename T>
+StackArrT<T>::~StackArrT() {
+	delete[];
+	data_ = nullptr;
+}
+
+template <typename T>
+StackArrT<T>::StackArrT(const StackArrT<T>& other);
+template <typename T>
+StackArrT<T>::StackArrT(StackArrT<T>&& other);
+template <typename T>
+StackArrT<T>::StackArrT(const std::initializer_list<T>& list);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 2024 by Polevoi Dmitry under Unlicense
-
-/*#pragma once
-#ifndef STACKARR_STACKARR_HPP_20240203
-#define STACKARR_STACKARR_HPP_20240203
-
-#include <cstddef>
-
-struct Complex;
-
-class StackArr {
-public:
-  [[nodiscard]] StackArr() = default;
-
-  [[nodiscard]] StackArr(const StackArr&) = default;
-  
-  ~StackArr() = default;
-  
-  [[nodiscard]] StackArr& operator=(const StackArr&) = default;
-
-  bool IsEmpty() const noexcept;
-
-  void Pop() noexcept;
-
-  void Push(const Complex& val);
-  
-  [[nodiscard]] Complex& Top();
-
-  [[nodiscard]] const Complex& Top() const;
-
-  void Clear() noexcept;
-
-private:
-  std::ptrdiff_t size_ = 0;   //!< число элементов в буфере
-  std::ptrdiff_t i_top_ = -1; //!< индекс top элемента
-  Complex* data_ = nullptr;   //!< элементы стека
+template <typename T>
+void StackArrT<T>::StackArrT::push(const T& value) {
+	i_top_ += 1;
+	*i_top_ = value;
+	size_ += 1;
 };
 
-#endif // !STACKARR_STACKARR_HPP_20240203
-*/
+template <typename T>
+void StackArrT<T>::StackArrT::pop() {
+	std::cout << *i_top_;
+	i_top_ -= 1;
+	i_top_ = *i_top_;
+	size_ -= 1;
+};
+
+template <typename T>
+T& StackArrT<T>::StackArrT::top() const {
+	std::cout << *i_top_;
+};
+
+template <typename T>
+void StackArrT<T>::StackArrT::swap(StackArrT<T>& other) {
+	std::swap(StackArrT, other);
+};
+
+template <typename T>
+void StackArrT<T>::StackArrT::merge(StackArrT<T>& other) {
+
+};
+
+template <typename T>
+bool StackArrT<T>::StackArrT::empty() const {
+	if (size_ == 0) {
+		std::cout << "true";
+	}
+	else {
+		std::cout << "false";
+	}
+};
+template <typename T>
+std::ptrdiff_t StackArrT<T>::size() const {
+	std::cout << i_top_ + 1;
+};
+
+template <typename T>
+bool StackArrT<T>::operator==(const StackArrT<T>& rhs) const;
+
+template <typename T>
+bool StackArrT<T>::operator!=(const StackArrT<T>& rhs) const;
+
+template <typename T>
+StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept;
+
+template <typename T>
+StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other);
+	
