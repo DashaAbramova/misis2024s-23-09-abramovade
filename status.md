@@ -1,4 +1,4 @@
-CHECK: 20240406-022955
+CHECK: 20240410-202318
 STATUS: lab complex - test-failed
 STATUS: lab complex_io - test-ok
 STATUS: lab complex_m - test-ok
@@ -8,7 +8,7 @@ STATUS: lab rational_m - test-ok
 STATUS: lab dynarr - test-failed
 STATUS: lab dynarr_m - test-failed
 ERROR: lab stackarr - test build failed
-STATUS: lab stackarr_m - test-failed
+ERROR: lab stackarr_m - test build failed
 ERROR: lab stacklst - test build failed
 ERROR: lab stacklst_m - test build failed
 ERROR: lab queuearr - test build failed
