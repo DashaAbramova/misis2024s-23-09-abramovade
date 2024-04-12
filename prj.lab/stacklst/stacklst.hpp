@@ -1,42 +1,105 @@
-// 2024 by Polevoi Dmitry under Unlicense
-
-#pragma once
-#ifndef STACKLST_STACKLST_HPP_20240213
-#define STACKLST_STACKLST_HPP_20240213
-
-#include <complex/complex.hpp>
-
+#include<iostream>
 #include <cstddef>
+#include<stdexcept>
 
-class StackLst {
+template <typename T>
+class StackLstT {
 public:
-  StackLst() = default;
+    StackLstT();
+    ~StackLstT();
+    StackLstT(const StackLstT<T>& other);
+    StackLstT(StackLstT<T>&& other);
+    StackLstT(const std::initializer_list<T>& list);
 
-  StackLst(const StackLst&) = default;
-  
-  ~StackLst() = default;
-  
-  [[nodiscard]] StackLst& operator=(const StackLst&) = default;
+    void push(const T& value);
+    void pop();
+    T& top() const;
+    void swap(StackLstT<T>& other);
+    void merge(StackLstT<T>& other);
 
-  bool IsEmpty() const noexcept;
+    bool empty() const;
+    std::ptrdiff_t size() const;
 
-  void Pop() noexcept;
+    bool operator==(const StackLstT<T>& rhs) const;
+    bool operator!=(const StackLstT<T>& rhs) const;
 
-  void Push(const Complex& val);
-  
-  [[nodiscard]] Complex& Top();
-
-  [[nodiscard]] const Complex& Top() const;
-
-  void Clear() noexcept;
+    StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
+    StackLstT<T>& operator=(StackLstT<T>&& other);
 
 private:
-  struct Node {
-    Complex val;
-    Node* next = nullptr;
-  };
-
-  Node* head_ = nullptr;   //!< 
+    struct Node {
+        T value;
+        Node* next = nullptr;
+    };
+    Node* head_ = nullptr;
 };
 
-#endif
+template <typename T>
+StackLstT<T>::StackLstT() {
+    newNode = new T;
+    newNode* = nullptr;
+    if (empty()) {
+        head_ = newNode;
+        next = nullptr;
+    }
+    else {
+        tail* = &newNode;
+        next = *newNode;
+    }
+}
+
+template <typename T>
+StackLstT<T>::~StackLstT() {
+}
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+void StackLstT<T>::push(const T& value){
+
+}
+template <typename T>
+void StackLstT<T>::pop(){
+    delete[]*tail;
+    next = tail;
+}
+
+template <typename T>
+T& StackLstT<T>::StackLst::top() const{
+    return *tail;
+}
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+bool StackLstT<T>::empty() const {
+    return head == nullptr;
+}
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+template <typename T>
+StackLstT<T>::
+
+
