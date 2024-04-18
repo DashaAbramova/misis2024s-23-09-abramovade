@@ -16,5 +16,8 @@ target_link_libraries(test_newdelete newdelete)
 add_executable(test_stacklst test_stacklst.cpp)
 target_link_libraries(test_stacklst stacklst)
 
+add_executable(test_CircleQueue test_CircleQueue.cpp)
+target_link_libraries(test_CircleQueue CircleQueue)
+
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_stackarr)
 

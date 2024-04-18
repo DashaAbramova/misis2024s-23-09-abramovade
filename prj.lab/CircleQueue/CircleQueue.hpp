@@ -1,33 +1,41 @@
+#ifndef CIRCLEQUEUE_H
+#define CIRCLEQUEUE_H
+
 #include<iostream>
 #include<vector>
 #include<stdexcept>
-
 
 class CircleQueue {
 public:
 	CircleQueue();
 	~CircleQueue();
-	T& top() const;
+	int& top() const;
 	void push(const int& value);
 	bool full() const;
 	void size() const;
-	CircleQueue::operator+=() const;
-	CircleQueue::operator-=() const;
+	CircleQueue operator+=() const;
+	CircleQueue operator-=() const;
 
 privite:
-	std::vector<int>CircleQueue;
-	CircleQueue.reserve(8);
-	int capacity; //фиксированность размера
-	int front = 0;//начало очереди
-	int end = -1;//конец очереди
-	int begin = 0;//начало выделенной памяти
-	int getSize = 0;//кол-во элементов
+	std::vector<int>CircleQueue(8);
+	int front = 0;
+	int end = -1;
+	int begin = 0;
+	int getSize = 0;
 };
 
 
 CircleQueue<int>::CircleQueue() {
-	if (getSize <= 7) {
-		end + 1 = new int;
+	if(size() == 0) {
+		*front = new int;
+		end += 1;
+	}
+	else if (size() <= 7) {
+		if(end==7) {
+			end = 0;
+		}
+		end += 1;
+		end = new int;
 		getSize += 1;
 	}
 	else {
@@ -36,6 +44,9 @@ CircleQueue<int>::CircleQueue() {
 };
 
 CircleQueue<int>::~CircleQueue() {
+	if(size() == 0) {
+		throw std::invalid_argument("Memory empty");
+	}
 	delete[] *end;
 	if (end <= 7) {
 		end -= 1;
@@ -47,6 +58,9 @@ CircleQueue<int>::~CircleQueue() {
 };
 
 void CircleQueue<int>::CircleQueue::top() const {
+	if(size() == 0) {
+		throw std::invalid_argument("Memory empty");
+	}
 	return *front;
 	delete[]*front;
 	if (front == 7) {
@@ -55,22 +69,20 @@ void CircleQueue<int>::CircleQueue::top() const {
 	else {
 		front++;
 	}
-	getSize += 1;
+	getSize -= 1;
 };
 
 
 void CircleQueue<int>::CircleQueue::push(const int& value) {
-	if (getSize < 8) {
+	if (size() < 8) {
 		if (end < 7) {
 			end++;
-			*end = value;
-			getSize += 1;
 		}
 		else {
 			end = 0;
-			*end = value
-			getSize += 1;
 		}
+		*end = value;
+		getSize += 1;
 	}
 	else {
 		throw std::invalid_argument("Memory full");
@@ -78,7 +90,7 @@ void CircleQueue<int>::CircleQueue::push(const int& value) {
 };
 
 bool CircleQueue<int>::CircleQueue::full() const {
-	return (getSize == 8);
+	return (size() == 8);
 };
 
 void CircleQueue<int>::CircleQueue::size() const {
@@ -92,10 +104,10 @@ void CircleQueue<int>::CircleQueue::getBack() const {
 	getFront = *end;
 }
 
-CircleQueue& CircleQueue::operator+=() const{
-	//складываем первый и последний элемент
-	//добавляем новый элемент в конец(без удаления)
-	if ((getSize < 8) && (getSize >= 2)) {
+CircleQueue CircleQueue::operator+=() const{
+	//РѕРїРµСЂР°С‚РѕСЂ СЃРєР»Р°РґС‹РІР°РµС‚ РїРµСЂРІС‹Р№ Рё РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚
+	//РґРѕР±Р°РІР»СЏРµС‚ РµРіРѕ РІ РєРѕРЅРµС†(Р±РµР· СѓРґР°Р»РµРЅРёСЏ)
+	if ((size() < 8) && (size() >= 2)) {
 		newend = *front + *end;
 		if (end == 7){
 			end = 0;
@@ -111,10 +123,10 @@ CircleQueue& CircleQueue::operator+=() const{
 		throw std::invalid_argument("Error memory");
 	}
 }
-CircleQueue& CircleQueue::operator-=() const{
-	//вычитает из последего элемента первый
-	//добавляет новый элемент в конец(без удаления)
-	if ((getSize < 8) && (getSize >= 2)) {
+CircleQueue CircleQueue::operator-=() const{
+	//РѕРїРµСЂР°С‚РѕСЂ РІС‹С‡РёС‚Р°РµС‚ РёР· РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РїРµСЂРІС‹Р№
+	//РґРѕР±Р°РІР»СЏРµС‚ РµРіРѕ РІ РєРѕРЅРµС†(Р±РµР· СѓРґР°Р»РµРЅРёСЏ)
+	if ((size() < 8) && (size() >= 2)) {
 		newend = *end - *front;
 		if (end == 7) {
 			end = 0;
@@ -130,5 +142,5 @@ CircleQueue& CircleQueue::operator-=() const{
 		throw std::invalid_argument("Error memory");
 	}
 }
-
+#endif
 

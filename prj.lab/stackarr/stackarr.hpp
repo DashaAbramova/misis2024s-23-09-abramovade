@@ -1,3 +1,6 @@
+#ifndef STACKARRT_HPP
+#define STACKARRT_HPP
+
 #include<initializer_list>
 #include<stdexcept>
 
@@ -49,7 +52,6 @@ StackArrT<T>::~StackArrT() {
 	delete[] data_;
 	data_ = nullptr;
 };
-
 template <typename T>
 StackArrT<T>::StackArrT(const StackArrT<T>& other) {
 	if (other.empty()) {
@@ -61,7 +63,7 @@ StackArrT<T>::StackArrT(const StackArrT<T>& other) {
 		data_ = new T[other.size_];
 		i_top_ = other.i_top_;
 		size_ = other.size_;
-		std::copy(other.data_, other.data_ + size_, data_);
+		std::copy(other.data_, other.data_ + i_top_ + 1, data_);
 	}
 };
 template <typename T>
@@ -84,46 +86,53 @@ StackArrT<T>::StackArrT(const std::initializer_list<T>& list) {
 
 
 template <typename T>
-void StackArrT<T>::StackArrT::push(const T& value) {
-	if (data_ == nullptr) {
+void StackArrT<T>::push(const T& value) {
+	if (empty()) {
 		size_ = 8;
 		data_ = new T[size_];
 	}
 	else if (size_ == i_top_ + 1) {
 		T* new_data_ = new T[size_ * 2];
-		std::copy(data_, data_ + size_, new_data_);
+		std::copy(data_, data_ + i_top_ + 1, new_data_);
 		size_ *= 2;
 		std::swap(new_data_, data_);
 		delete[] new_data_;
+		new_data_ = nullptr;
 	}
 	i_top_++;
 	data_[i_top_] = value;
 };
 
 template <typename T>
-void StackArrT<T>::StackArrT::pop() {
+void StackArrT<T>::pop() {
+	if (i_top_ < 0) {
+		throw std::logic_error("Empty stack.");
+	}
 	i_top_ -= 1;
 };
 
 template <typename T>
-T& StackArrT<T>::StackArrT::top() const {
-	return data_[i_top_ ];
+T& StackArrT<T>::top() const {
+	if (i_top_ < 0) {
+		throw std::logic_error("Empty stack.");
+	}
+	return data_[i_top_];
 };
 
 template <typename T>
-void StackArrT<T>::StackArrT::swap(StackArrT<T>& other) {
+void StackArrT<T>::swap(StackArrT<T>& other) {
 	std::swap(size_, other.size_);
 	std::swap(i_top_, other.i_top_);
 	std::swap(data_, other.data_);
 };
 
 template <typename T>
-void StackArrT<T>::StackArrT::merge(StackArrT<T>& other) {
+void StackArrT<T>::merge(StackArrT<T>& other) {
 	if (empty()) {
 		this->swap(other);
 	}
 	else {
-		T* new_data_ = new T[size_ + other.size_];
+		T *new_data_ = new T[size_ + other.size_];
 		for (int i = 0; i < i_top_ + 1; i++) {
 			new_data_[i] = data_[i];
 		}
@@ -142,7 +151,7 @@ void StackArrT<T>::StackArrT::merge(StackArrT<T>& other) {
 };
 
 template <typename T>
-bool StackArrT<T>::StackArrT::empty() const {
+bool StackArrT<T>::empty() const {
 	return i_top_ == -1;
 };
 template <typename T>
@@ -156,7 +165,7 @@ bool StackArrT<T>::operator==(const StackArrT<T>& rhs) const {
 		return false;
 	}
 	else {
-		for (std::ptrdiff_t i = 0, i < (i_top_ + 1); i++) {
+		for (std::ptrdiff_t i = 0; i < (i_top_ + 1); i++) {
 			if (data_[i] != rhs.data_[i]) {
 				return false;
 			}
@@ -191,14 +200,14 @@ StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept{
 		size_ = rhs.size_;
 		i_top_ = rhs.i_top_;
 		data_ = new T[size_];
-		std::copy(rhs.data_, rhs.data_ + size_, data_);
+		std::copy(rhs.data_, rhs.data_ + i_top_ + 1, data_);
 	}
 	return *this;
 };
 
 template <typename T>
 StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) {
-	data = other.data_;
+	data_ = other.data_;
 	i_top_ = other.i_top_;
 	size_ = other.size_;
 	other.data_ = nullptr;
@@ -206,4 +215,5 @@ StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) {
 	other.size_ = 0;
 	return *this;
 };
-	
+
+#endif

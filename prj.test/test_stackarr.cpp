@@ -1,11 +1,11 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
+#include <iostream>
 #include <stackarr/stackarr.hpp>
 #include"doctest.h"
 #include <cstdint>
 
-TEST_CASE_TEMPLATE("[stackarrt] - Constructor", T, int, float, double,
-    long long) {
+TEST_CASE_TEMPLATE("[stackarrt] - Constructor", T, int, float, double, long long) {
     SUBCASE("Default constructor") {
         StackArrT<T> defCtor;
         CHECK(defCtor.empty());
@@ -66,14 +66,14 @@ TEST_CASE_TEMPLATE("[stackarrt] - Push, Pop and Top", T, int, float, double,
     }
     SUBCASE("Top and Pop with empty stack") {
         StackArrT<T> s;
-        CHECK_THROWS_WITH(s.pop(), "StackArr - try pop from empty stack.");
-        CHECK_THROWS_WITH(s.top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(s.pop(), "Empty stack.");
+        CHECK_THROWS_WITH(s.top(), "Empty stack.");
         s.push(1);
         CHECK(s.top() == 1);
         CHECK(!s.empty());
         s.pop();
-        CHECK_THROWS_WITH(s.pop(), "StackArr - try pop from empty stack.");
-        CHECK_THROWS_WITH(s.top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(s.pop(), "Empty stack.");
+        CHECK_THROWS_WITH(s.top(), "Empty stack.");
     }
 }
 
