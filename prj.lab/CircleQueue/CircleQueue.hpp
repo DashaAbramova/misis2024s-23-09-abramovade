@@ -2,140 +2,134 @@
 #define CIRCLEQUEUE_H
 
 #include<iostream>
-#include<vector>
 #include<stdexcept>
 
 class CircleQueue {
 public:
 	CircleQueue();
 	~CircleQueue();
-	int& top() const;
+	int top();
 	void push(const int& value);
-	bool full() const;
-	void size() const;
-	CircleQueue operator+=() const;
-	CircleQueue operator-=() const;
+	bool empty();
+	int getSize();
+	int getFront();
+	int getBack();
+	int operator+=();
+	int operator-=();
 
-privite:
-	std::vector<int>CircleQueue(8);
-	int front = 0;
-	int end = -1;
-	int begin = 0;
-	int getSize = 0;
+
+private:
+	int capacity;
+	int* begin = nullptr;
+	int* front = nullptr;
+	int* end = nullptr;
 };
 
 
-CircleQueue<int>::CircleQueue() {
-	if(size() == 0) {
-		*front = new int;
-		end += 1;
-	}
-	else if (size() <= 7) {
-		if(end==7) {
-			end = 0;
-		}
-		end += 1;
-		end = new int;
-		getSize += 1;
-	}
-	else {
-		throw std::invalid_argument("Memory full");
-	}
+ CircleQueue::CircleQueue() {
+ 	capacity = 20;
+ 	begin = new int[capacity];
+ 	front = begin;
+ 	end = begin;
 };
 
-CircleQueue<int>::~CircleQueue() {
-	if(size() == 0) {
-		throw std::invalid_argument("Memory empty");
-	}
-	delete[] *end;
-	if (end <= 7) {
-		end -= 1;
-	}
-	else if (end == 0) {
-		end = 7;
-	}
-	getSize += 1;
+CircleQueue::CircleQueue(int _capacity) {
+	capacity = _capacity + 1;
+	begin = new int[capacity];
+	front = begin;
+	end = begin;
+};
+CircleQueue::~CircleQueue() {
+	delete[] begin;
+	begin = nullptr;
+	front = nullptr;
+	end = nullptr;
 };
 
-void CircleQueue<int>::CircleQueue::top() const {
-	if(size() == 0) {
+int CircleQueue::top() {
+	if(getSize() == 0) {
 		throw std::invalid_argument("Memory empty");
 	}
 	return *front;
-	delete[]*front;
-	if (front == 7) {
+	if (front == (capacity-1)) {
+		delete *front;
 		front = 0;
 	}
 	else {
-		front++;
+		int temp = front + 1;
+		delete *front;
+		front = temp;
 	}
-	getSize -= 1;
 };
 
 
-void CircleQueue<int>::CircleQueue::push(const int& value) {
-	if (size() < 8) {
-		if (end < 7) {
+void CircleQueue::push(const int& value) {
+	if (getSize() < capacity) {
+		if (end < (capacity-1)) {
 			end++;
 		}
 		else {
 			end = 0;
 		}
 		*end = value;
-		getSize += 1;
 	}
 	else {
 		throw std::invalid_argument("Memory full");
 	}
 };
 
-bool CircleQueue<int>::CircleQueue::full() const {
-	return (size() == 8);
+bool CircleQueue::empty() {
+	return (getSize() == 0);
 };
 
-void CircleQueue<int>::CircleQueue::size() const {
-	size = getSize;
+int CircleQueue::getSize() {
+	if (front < end) {
+		return (end - front + 1);
+	}
+	else if(front == end) {
+		return 1;
+	}
+	else if(end < front){
+		return (capacity - front + end + 1);
+	}
 };
-
-void CircleQueue<int>::CircleQueue::getFront() const {
-	getFront = *front;
+int CircleQueue::getFront() {
+	return *front;
 }
-void CircleQueue<int>::CircleQueue::getBack() const {
-	getFront = *end;
+int CircleQueue::getBack() {
+	return *end;
 }
 
-CircleQueue CircleQueue::operator+=() const{
+int CircleQueue::operator+=(){
 	//оператор складывает первый и последний элемент
 	//добавляет его в конец(без удаления)
-	if ((size() < 8) && (size() >= 2)) {
-		newend = *front + *end;
-		if (end == 7){
+	if ((getSize() < capacity) && (getSize() >= 2)) {
+		int newend = *front + *end;
+		if (end == (capacity-1)){
 			end = 0;
 		}
 		else {
 			end += 1;
 		}
 		*end = newend;
-		getSize += 1;
 		return *end;
 	}
 	else {
 		throw std::invalid_argument("Error memory");
 	}
 }
-CircleQueue CircleQueue::operator-=() const{
+int CircleQueue::operator-=(){
 	//оператор вычитает из последнего элемента первый
 	//добавляет его в конец(без удаления)
-	if ((size() < 8) && (size() >= 2)) {
-		newend = *end - *front;
-		if (end == 7) {
+	if ((getSize() < capacity) && (getSize() >= 2)) {
+		int newend = *end - *front;
+		if (end == (capacity-1)) {
 			end = 0;
 		}
 		else {
 			end += 1;
 		}
 		*end = newend;
-		getSize += 1;
 		return *end;
 	}
 	else {

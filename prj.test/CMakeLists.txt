@@ -19,5 +19,13 @@ target_link_libraries(test_stacklst stacklst)
 add_executable(test_CircleQueue test_CircleQueue.cpp)
 target_link_libraries(test_CircleQueue CircleQueue)
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_stackarr)
+add_executable(test_IStackArr test_IStackArr.cpp)
+target_link_libraries(test_IStackArr IStackArr)
+
+add_executable(test_IStackLst test_IStackLst.cpp)
+target_link_libraries(test_IStackLst IStackLst)
+
+add_executable(test_BinaryTree test_BinaryTree.cpp)
+target_link_libraries(test_BinaryTree BinaryTree)
+
 
