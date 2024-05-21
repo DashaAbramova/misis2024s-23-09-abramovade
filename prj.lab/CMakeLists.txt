@@ -6,3 +6,5 @@ add_subdirectory(stacklst)
 add_subdirectory(CircleQueue)
 add_subdirectory(IStack)
 add_subdirectory(BinaryTree)
+add_subdirectory(CustomClass)
+

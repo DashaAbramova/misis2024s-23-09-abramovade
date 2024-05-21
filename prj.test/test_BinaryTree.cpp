@@ -1,44 +1,49 @@
-struct TreeNode {
-	int data;
-	TreeNode* left;
-	TreeNode* right;
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <BinaryTree/BinaryTree.hpp>
 
-	TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
-};
+#include "doctest.h"
 
-class BinarySearchTree {
-public:
-	// Конструктор
-	BinarySearchTree();
+TEST_CASE("BinaryTree tests") {
+	BinaryTree bst;
+	BinaryTree bstEmpty;
 
-	// Деструктор
-	~BinarySearchTree();
+	//         5
+	//     3       7
+	//   2   4   6
 
-	// Метод для получения корневого узла дерева
-	TreeNode* root();
+	CHECK(bst.empty() == true);
+	bst.add(5);
+	bst.add(3);
+	bst.add(7);
+	bst.add(2);
+	bst.add(4);
+	bst.add(6);
+	CHECK(bst.empty() == false);
+	CHECK_THROWS_WITH(bst.add(5), "Element already exists");
+	CHECK(bst.root()->data == 5);
 
-	// Метод для добавления узла в дерево
-	void add(int data);
+	CHECK(bst.has(5) == true);
+	CHECK(bst.has(3) == true);
+	CHECK(bst.has(7) == true);
+	CHECK(bst.has(2) == true);
+	CHECK(bst.has(4) == true);
+	CHECK(bst.has(6) == true);
+	CHECK(bst.has(8) == false);
+	CHECK_THROWS_WITH(bstEmpty.has(5), "Empty tree");
 
-	// Метод для проверки наличия узла в дереве
-	bool has(int data);
+	TreeNode *node = bst.find(3);
+	CHECK(node->data == 3);
+	CHECK(node->left->data == 2);
+	CHECK(node->right->data == 4);
+	CHECK_THROWS_WITH(bstEmpty.find(5), "Empty tree");
 
-	// Метод для поиска узла в дереве
-	TreeNode* find(int data);
+	bst.remove(3);
+	CHECK(bst.has(3) == false);
+	CHECK_THROWS_WITH(bstEmpty.remove(5), "Empty tree");
+	CHECK_THROWS_WITH(bst.remove(3), "Empty tree");
 
-	// Метод для удаления узла из дерева
-	void remove(int data);
-	//найти ноду
-	// если лист - просто удалить
-	// если у ноду есть один из потомков
-	// если есть оба - минимальный узел в правом поддереве заменяет текущую
+	CHECK(bst.min() == 2);
+	CHECK(bst.max() == 7);
 
-	// Метод для нахождения минимального значения в дереве
-	int min();
-
-	// Метод для нахождения максимального значения в дереве
-	int max();
-
-private:
-	TreeNode* root;
-};
+	CHECK(bst.empty() == false);
+}
