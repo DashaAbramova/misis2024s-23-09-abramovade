@@ -28,7 +28,9 @@ target_link_libraries(test_IStackLst IStackLst)
 add_executable(test_BinaryTree test_BinaryTree.cpp)
 target_link_libraries(test_BinaryTree BinaryTree)
 
+add_executable(test_CustomClass test_CustomClass.cpp)
+target_link_libraries(test_CustomClass CustomClass)
+
 add_executable(test_CustomContainer test_CustomContainer.cpp)
 target_link_libraries(test_CustomContainer CustomContainer)
-
 
