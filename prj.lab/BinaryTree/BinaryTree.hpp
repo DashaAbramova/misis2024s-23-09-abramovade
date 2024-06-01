@@ -53,6 +53,6 @@ private:
 	void deleteTree(TreeNode *node);
 
 	bool isLeaf(TreeNode *node);
-	bool hasOneChild(TreeNode *node);
-	bool hasTwoChildren(TreeNode *node);
+	bool hasOneChild(TreeNode *node); // имеет одного потомка
+	bool hasTwoChildren(TreeNode *node); //имеет 2 потомка
 };

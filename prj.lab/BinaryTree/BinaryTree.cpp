@@ -1,4 +1,4 @@
-// Copyright [2024] <Copyright Daria>
+// Programm [2024] <Programm Daria>
 
 #include <BinaryTree/BinaryTree.hpp>
 #include <stack>
